@@ -2,6 +2,7 @@
 
 
 ![Wallpaper preview](wallpapers/wallhaven-6lermx.png)
+credit to @mahati.art on ig
 
 <details>
 <summary><b>What is this? What do I need?</b></summary>
