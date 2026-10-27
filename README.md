@@ -31,7 +31,7 @@ Check other [Keybinds](#keybinds). You can also hover over bar elements to see w
 
 </details>
 
-A clean and minimal fork of 43PR's existing hyprland + quickshell configs.
+A clean and minimal fork of 43PR's existing hyprland + quickshell + spicetify configs.
 
 ## Install Arch
 
@@ -60,7 +60,7 @@ git push
 
 ## What's installed?
 
-`assets/cursors/W11-Cursor-Dark/` contains a clean, dark cursor theme, and `wallpapers/` contains 46 dark wallpapers. If you want to add/remove any, go to /home/YOURUSERNAME/Pictures/Wallpapers/. `packages/pacman-explicit.txt` also pre-installs steam, spotify, gnome text editor, hyprmod, obsidian. syncthing, localsend, 7zip and zen browser.
+`assets/cursors/W11-Cursor-Dark/` contains a clean, dark cursor theme, and `wallpapers/` contains 46 dark wallpapers. If you want to add/remove any, go to /home/YOURUSERNAME/Pictures/Wallpapers/. `packages/pacman-explicit.txt` also pre-installs steam, spotify, gnome text editor, hyprmod, obsidian. syncthing, localsend, 7zip, chatgpt + codex and zen browser.
 
 ## Applications
 
@@ -68,7 +68,7 @@ git push
 
 **Super + D** - Toggle application launcher (Rofi)
 
-**Super + E** - Open file manager
+**Super + E** - Open File Manager
 
 **Super + B** - Open Zen Browser
 
