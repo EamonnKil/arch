@@ -104,8 +104,6 @@ git push
 
 **Super + I** - Toggle settings
 
-**Super + L** - Toggle light/dark theme
-
 **Super + A** - Toggle notifications
 
 **Super + H** - Toggle to-do panel
