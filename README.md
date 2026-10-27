@@ -1,4 +1,7 @@
-# Personal Arch + Hyprland dotfiles
+## arch. a minimal, productive arch linux setup.
+
+
+![Wallpaper preview](wallpapers/wallhaven-6lermx.png)
 
 Personalized from an existing 43PR Hyprland setup. The original MIT license is retained in `LICENSE` because this repository includes 43PR files. Config files are stored in `.config/`; package snapshots and system notes are separate. Review every change before pushing, and keep this repository **private** unless you have audited it for personal data.
 
