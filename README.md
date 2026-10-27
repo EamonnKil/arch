@@ -68,8 +68,6 @@ git push
 
 **Super + D** - Toggle application launcher (Rofi)
 
-**Super + X** - Toggle wheel launcher
-
 **Super + E** - Open file manager
 
 **Super + B** - Open Zen Browser
