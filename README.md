@@ -62,6 +62,10 @@ git push
 
 `assets/cursors/W11-Cursor-Dark/` contains a clean, dark cursor theme, and `wallpapers/` contains 46 dark wallpapers. If you want to add/remove any, go to /home/YOURUSERNAME/Pictures/Wallpapers/. `packages/pacman-explicit.txt` also pre-installs steam, spotify, gnome text editor, hyprmod, obsidian. syncthing, localsend, 7zip, chatgpt + codex and zen browser.
 
+## Notes
+
+To get zen browser transparency working, install https://zen-browser.app/mods/642854b5-88b4-4c40-b256-e035532109df/ and enable transparency, and install https://addons.mozilla.org/en-US/firefox/addon/zen-internet/
+
 ## Applications
 
 **Super + T** - Open terminal
