@@ -96,8 +96,6 @@ git push
 
 **Super + Right Mouse Button** - Resize window
 
-**Super + O** - Toggle window opacity
-
 ## System Controls
 
 **Super + Tab** - Lock screen
