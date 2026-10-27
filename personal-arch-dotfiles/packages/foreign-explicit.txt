@@ -1,0 +1,7 @@
+hyprmod
+localsend-bin
+papirus-folders
+spotify
+yay
+yay-debug
+zen-browser-bin

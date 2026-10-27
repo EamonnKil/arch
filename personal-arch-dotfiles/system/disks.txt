@@ -1,0 +1,5 @@
+NAME        TYPE   SIZE FSTYPE
+zram0       disk   3.7G swap
+nvme0n1     disk 238.5G 
+├─nvme0n1p1 part     1G vfat
+└─nvme0n1p2 part 237.5G ext4
