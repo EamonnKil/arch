@@ -1,0 +1,24 @@
+# Personal data, credentials, and machine/runtime state
+.env
+.env.*
+**/*secret*
+**/*token*
+**/*credential*
+**/*password*
+**/*cookie*
+**/id_*
+**/*.pem
+**/*.key
+**/known_hosts
+**/history
+**/state/
+**/cache/
+**/Cache/
+**/Cookies
+**/Cookies-*
+**/*.sqlite
+**/*.sqlite-*
+**/*.zip
+
+# Local backup artifacts
+backups/
