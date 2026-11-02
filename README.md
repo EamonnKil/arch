@@ -27,7 +27,6 @@ Check other [Keybinds](#keybinds). You can also hover over bar elements to see w
 ### What should I know before installing?
 
 - Log out and back in once the installer finishes.
-- Wallpapers aren't included in the install. Download some and put them in `Pictures/Wallpapers`.
 
 </details>
 
