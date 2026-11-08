@@ -59,7 +59,7 @@ git push
 
 ## What's installed?
 
-`assets/cursors/W11-Cursor-Dark/` contains a clean, dark cursor theme, and `wallpapers/` contains 46 dark wallpapers. If you want to add/remove any, go to /home/YOURUSERNAME/Pictures/Wallpapers/. `packages/pacman-explicit.txt` also pre-installs steam, spotify, gnome text editor, hyprmod, obsidian. syncthing, localsend, 7zip, chatgpt + codex and zen browser.
+`assets/cursors/W11-Cursor-Dark/` contains a clean, dark cursor theme, and `wallpapers/` contains 55 dark wallpapers. If you want to add/remove any, go to /home/YOURUSERNAME/Pictures/Wallpapers/. `packages/pacman-explicit.txt` also pre-installs steam, spotify, gnome text editor, hyprmod, obsidian. syncthing, localsend, 7zip, chatgpt + codex and zen browser.
 
 ## Notes
 
