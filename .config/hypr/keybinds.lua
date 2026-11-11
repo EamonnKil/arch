@@ -6,12 +6,25 @@
 local home = os.getenv("HOME")
 local menu = "rofi -show drun"
 
+-- Scrolling layout navigation
+hl.bind("SUPER + RIGHT", hl.dsp.layout("focus r"))
+hl.bind("SUPER + LEFT", hl.dsp.layout("focus l"))
+
+-- Move between columns
+hl.bind("SUPER + PERIOD", hl.dsp.layout("move +col"))
+hl.bind("SUPER + COMMA", hl.dsp.layout("move -col"))
+
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(terminal)) 
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("pgrep -x rofi >/dev/null && pkill -x rofi || " .. menu)) -- Toggle launcher
-hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("qs ipc call wheel toggle")) -- Wheel launcher
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
-hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
-hl.bind(mainMod .. " + Q", hl.dsp.window.close())
+hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("zen-browser"))hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
+hl.bind(mainMod .. " + q", hl.dsp.window.close())
+
+hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("spotify"))
+
+hl.bind(mainMod .. " + O", hl.dsp.exec_cmd("obsidian"))
+
+hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("steam"))
 
 hl.bind(mainMod .. " + Tab", hl.dsp.exec_cmd("hyprlock")) -- Lock screen
 
@@ -25,13 +38,15 @@ hl.bind(mainMod .. " + SHIFT + C", hl.dsp.exec_cmd("qs -n -p ~/.config/quickshel
 
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = 0 })) -- Fullscreen
 
-hl.bind(mainMod .. " + O", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/opacity.sh")) -- Opacity
+hl.bind(mainMod .. " + N", hl.dsp.exec_cmd(home .. "/.config/hypr/scripts/opacity.sh")) -- Opacity
 
-hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("python3 " .. home .. "/.config/43pr/bin/theme.py toggle")) -- Light/dark toggle
+hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("localsend"))
 
-hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("qs ipc call notifications toggle")) -- Notifications
+hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("qs ipc call notifications toggle")) -- Notifications
 
-hl.bind(mainMod .. " + C", hl.dsp.exec_cmd("qs ipc call todo toggle"))  -- To-do
+hl.bind(mainMod .. " + C", hl.dsp.exec_cmd("chatgpt"))
+
+hl.bind(mainMod .. " + H", hl.dsp.exec_cmd("qs ipc call todo toggle"))  -- To-do
 
 -- Mouse move/resize window
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
@@ -133,8 +148,8 @@ for i = 1, 10 do
 end
 
 -- Media keys (confirmed pattern from the official example config)
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"), { locked = true, repeating = true })
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%+"), { locked = true, repeating = true })
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%-"), { locked = true, repeating = true })
 hl.bind("XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), { locked = true })
 
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })

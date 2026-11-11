@@ -72,6 +72,9 @@ PanelWindow {
         showDirs: false
         nameFilters: ["*.png", "*.jpg", "*.jpeg", "*.webp"]
         sortField: FolderListModel.Name
+        onStatusChanged: {
+            if (status === FolderListModel.Ready) list.centerOnStart()
+        }
     }
 
     MouseArea {
@@ -129,7 +132,8 @@ PanelWindow {
         anchors.verticalCenter: parent.verticalCenter
         z: 1
         focus: true
-        model: folderModel
+        visible: ready
+        model: folderModel.count * 10000
         orientation: ListView.Horizontal
         spacing: 0
         clip: true
@@ -137,6 +141,7 @@ PanelWindow {
         boundsBehavior: Flickable.StopAtBounds
 
         property int selectedIndex: main.startPosition
+        property int virtualIndex: 0
 
         readonly property real tileHeight: main.refHeight * main.ui
         readonly property real tileWidth: (main.refWidth / Math.max(1, configs.number_of_pictures) - 10) * main.ui
@@ -152,14 +157,19 @@ PanelWindow {
         leftMargin: sideMargin
         rightMargin: sideMargin
 
-        function clampIndex(i) { return Math.max(0, Math.min(i, count - 1)) }
+        function clampIndex(i) { return Math.max(0, Math.min(i, folderModel.count - 1)) }
         function ensureVisibleAnimated(i) { contentX = i * step }
 
         function centerOnStart() {
-            if (userMoved || count <= 0 || configs.number_of_pictures <= 0) return
-            selectedIndex = clampIndex(main.startPosition)
-            contentX = selectedIndex * step
-            ready = true
+            if (userMoved || folderModel.status !== FolderListModel.Ready || folderModel.count <= 0 || configs.number_of_pictures <= 0) return
+            ready = false
+            selectedIndex = ((main.startPosition % folderModel.count) + folderModel.count) % folderModel.count
+            virtualIndex = folderModel.count * 5000 + selectedIndex
+            contentX = virtualIndex * step
+            Qt.callLater(function() {
+                if (folderModel.status === FolderListModel.Ready && folderModel.count > 0)
+                    list.ready = true
+            })
         }
 
         function activateCurrent() {
@@ -168,12 +178,13 @@ PanelWindow {
         }
 
         function moveSelection(delta, speedMultiplier) {
+            if (folderModel.count <= 0) return
             anim.velocity = main.speed * speedMultiplier
-            selectedIndex = clampIndex(selectedIndex + delta)
-            ensureVisibleAnimated(selectedIndex)
+            selectedIndex = ((selectedIndex + delta) % folderModel.count + folderModel.count) % folderModel.count
+            virtualIndex += delta
+            ensureVisibleAnimated(virtualIndex)
         }
 
-        onCountChanged: centerOnStart()
         onWidthChanged: centerOnStart()
         onTileWidthChanged: centerOnStart()
 
@@ -192,7 +203,9 @@ PanelWindow {
             width: list.tileWidth
             height: list.tileHeight
 
-            property bool active: index === list.selectedIndex
+            property int wallpaperIndex: folderModel.count > 0 ? index % folderModel.count : 0
+            property string wallpaperFileName: folderModel.count > 0 ? folderModel.get(wallpaperIndex, "fileName") : ""
+            property bool active: wallpaperIndex === list.selectedIndex && Math.abs(index - list.virtualIndex) < folderModel.count
             readonly property real baseWidth: list.tileWidth
             readonly property real baseCenterX: x - list.contentX + baseWidth / 2
             readonly property real distance: Math.abs(baseCenterX - list.viewportCenterX)
@@ -251,7 +264,7 @@ PanelWindow {
                     asynchronous: true
                     cache: false
                     smooth: true
-                    source: "file://" + main.cachePath + fileName
+                    source: "file://" + main.cachePath + delegateItem.wallpaperFileName
                     sourceSize.width: delegateItem.baseWidth * main.zoomScale
                     sourceSize.height: delegateItem.height
                     transform: Shear { xFactor: main.skewFactor }
@@ -282,15 +295,23 @@ PanelWindow {
             MouseArea {
                 anchors.fill: parent
                 hoverEnabled: list.ready
-                onEntered: { list.userMoved = true; list.selectedIndex = index }
+                onEntered: { list.userMoved = true; list.selectedIndex = delegateItem.wallpaperIndex }
                 onClicked: list.activateCurrent()
-                onWheel: function(wheel) { list.flick(-wheel.angleDelta.y * 8, 0); wheel.accepted = true }
+                onWheel: function(wheel) {
+                    const direction = wheel.angleDelta.y !== 0 ? wheel.angleDelta.y : wheel.angleDelta.x
+                    if (direction !== 0) list.moveSelection(direction < 0 ? 1 : -1, 1)
+                    wheel.accepted = true
+                }
             }
         }
 
         Keys.onPressed: function(event) {
             if (event.key === Qt.Key_Space) {
                 activateCurrent()
+            } else if (event.key === Qt.Key_Left) {
+                moveSelection(-1, 1)
+            } else if (event.key === Qt.Key_Right) {
+                moveSelection(1, 1)
             } else if (event.key === Qt.Key_W || event.key === Qt.Key_Escape) {
                 Qt.quit()
             } else {

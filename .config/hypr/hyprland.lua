@@ -7,7 +7,7 @@ mainMod    = "SUPER"
 terminal   = "kitty"
 menu       = "rofi -show drun"
 fileManager = "thunar"
-browser    = "brave"
+browser    = "zen"
 
 ---- AUTOSTART ----
 
@@ -25,7 +25,8 @@ end)
 
 ---- ENVIRONMENT VARIABLES ----
 
-hl.env("XCURSOR_SIZE", "14")
+hl.env("XCURSOR_THEME", "W11-Cursor-Dark")
+hl.env("XCURSOR_SIZE", "32")
 hl.env("QT_QPA_PLATFORM", "wayland")
 hl.env("MOZ_ENABLE_WAYLAND", "1")
 
@@ -33,23 +34,57 @@ hl.env("MOZ_ENABLE_WAYLAND", "1")
 
 hl.config({
     input = {
-        kb_layout = "us,latam",
+        kb_layout = "gb, us",
         follow_mouse = 1,
-        sensitivity = 0.5,
+        sensitivity = 0.3,
         touchpad = {
-            natural_scroll = false,
+            natural_scroll = true,
             tap_to_click = true,
         },
     },
 })
 
 -- LAYOUT
-hl.config({
-    dwindle = { preserve_split = true },
+
+-- Give Zen a full-width scrolling column
+hl.window_rule({
+    name = "browser-scrolling-width",
+    match = {
+        class = "zen",
+    },
+    scrolling_width = 1.0,
 })
+
+-- Global layout settings
+hl.config({
+    general = {
+        layout = "dwindle",
+    },
+    scrolling = {
+        fullscreen_on_one_column = false,
+        column_width = 0.5,
+        direction = "right",
+        follow_focus = 1,
+    },
+})
+
+-- Workspace 1 scrolling configuration
+hl.workspace_rule({
+    workspace = "1",
+    layout = "scrolling",
+    gaps_out = {
+        top = 5,
+        right = 4,
+        bottom = 8,
+        left = 4,
+    },
+})
+
 hl.config({
     master = { new_status = "master" },
 })
+
+
 
 -- MISC
 hl.config({
@@ -58,7 +93,6 @@ hl.config({
         disable_splash_rendering = true,
     },
 })
-
 ---- SPLIT-OUT FILES ----
 
 require("monitors")
@@ -68,3 +102,14 @@ require("rules")
 
 -- HyprMod managed settings
 require("hyprland-gui")
+
+hl.workspace_rule({
+    workspace = "1",
+    layout = "scrolling",
+    gaps_out = {
+        top = 5,
+        right = 4,
+        bottom = 8,
+        left = 4,
+    },
+})

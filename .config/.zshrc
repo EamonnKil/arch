@@ -63,3 +63,12 @@ ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=245'
 
 # 43PR theme controller
 theme() { python3 "$HOME/.config/43pr/bin/theme.py" "$@"; }
+
+export PATH=$PATH:/home/eamonnk/.spicetify
+
+# >>> Codex installer >>>
+export PATH="/home/eamonnk/.local/bin:$PATH"
+# <<< Codex installer <<<
+
+# opencode
+export PATH=/home/eamonnk/.opencode/bin:$PATH
